@@ -1,0 +1,88 @@
+<ion-header  [translucent]="true">
+  <ion-toolbar color="danger">
+    <ion-buttons slot="start" >
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-icon name="person-outline" size="large" slot="end" (click)="userData && userData!=0 ? cikis() : login()"></ion-icon>
+    <ion-title>Yemek Tarifleri</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+
+
+
+  <div *ngIf="!loginPage"  >
+    <h1 class="ortala"> Hoş Geldin <br> {{userData ? userData.ad_soyad:''}}</h1>
+  </div>
+
+  
+  <div *ngIf="!loginPage" > 
+    <ion-searchbar animated placeholder="Istediginiz Yemek !"   [(ngModel)]="kelime" (ngModelChange)="bul()" ></ion-searchbar>
+    </div>
+
+
+  
+
+<ion-list *ngIf="!loginPage">
+    <ion-card  *ngFor="let yemek of yemekler" [routerLink]="['/yemekdetay',yemek.yemek_adi,yemek.yemek_kalori,yemek.yemek_tarifi,yemek.yemek_malzemeleri,yemek.id,yemek.yemek_resim]" routerLinkActive="router-link-active"   >
+      <img src="{{yemek.yemek_resim}}"> 
+      <ion-card-header>
+      <ion-card-title class="ortala">{{yemek.yemek_adi}}</ion-card-title>
+      <ion-badge class="blok" color="danger" >{{yemek.yemek_kalori}} K.Kalori </ion-badge>
+    </ion-card-header>
+  </ion-card>
+</ion-list>
+
+
+
+
+<!-- login sayfasi  -->
+
+<div class="ortala" *ngIf="loginPage">
+ 
+
+  <ion-chip *ngIf="loginPage" outline color="danger" size="large"  >
+    <ion-icon  size="large" name="restaurant"></ion-icon>
+    <ion-label>
+      Yemek Tarifi programimiza giris yapmak icin
+      asagidaki bilgileri doldurup  giris yap butonuna tiklayiniz.
+    </ion-label>
+    <ion-icon size="large" name="restaurant"></ion-icon>
+  </ion-chip>
+
+
+  <ion-item>
+    <ion-label position="floating"> E-Mail </ion-label>
+    <ion-input [(ngModel)]="email"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="floating"> Şifre </ion-label>
+    <ion-input [(ngModel)]="password" type="password"> </ion-input>
+  </ion-item>
+
+  
+  <ion-button color="success" expand="block" shape="round"  class="ion-activatable ripple-parent" (click)="login()" [disabled]="!email || password?.length<5"> Giriş.
+    <ion-ripple-effect type="unbounded"></ion-ripple-effect>
+  </ion-button>
+
+</div>
+
+<!--  -->
+<div *ngIf="!kelime">
+<ion-card *ngFor="let ymk of yemek2" (ngModelChange)="yemekhepsi">
+  <img src="{{ymk.yemek_resim}}">
+  <ion-card-header>
+    <ion-card-title>{{ymk.yemek_adi}}</ion-card-title>
+    <ion-card-subtitle>{{ymk.yemek_kalori}}</ion-card-subtitle>
+  </ion-card-header>
+
+  <ion-card-content>
+    Keep close to Nature's heart... and break clear away, once in awhile,
+    and climb a mountain or spend a week in the woods. Wash your spirit clean.
+  </ion-card-content>
+</ion-card>
+</div>
+
+</ion-content>

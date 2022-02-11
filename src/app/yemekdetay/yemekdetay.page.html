@@ -1,0 +1,31 @@
+<ion-header >
+  <ion-toolbar color="danger" >
+    <ion-icon name="heart-outline" size="large" slot="end" ></ion-icon>
+    <ion-back-button slot="start" text="Geri" color="light" ></ion-back-button>
+    <ion-title >{{yemekadi}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+
+
+
+<ion-content>
+
+  <ion-card>
+    <img src="{{resim}}"> 
+    <ion-card-header>
+      <ion-card-title  class="ortala">{{yemekadi}}</ion-card-title>
+      <br>
+      <!-- <ion-card-subtitle>{{tarifi}}</ion-card-subtitle> -->
+    </ion-card-header>
+  
+    <ion-card-content  class="ortala">
+      <h1> Yapılışı:</h1><br>{{tarifi}}
+    </ion-card-content>
+    <ion-card-content class="ortala">
+      <h1>Malzeme Listesi:</h1><br>{{malzemeleri}}
+    </ion-card-content>
+  </ion-card>
+
+
+</ion-content>
